@@ -1,0 +1,30 @@
+import requests
+
+def get_token_price(token_symbol):
+    # Define a list of DEXs to check
+    dex_list = ["dex1", "dex2", "dex3"]
+    best_price = None
+    best_dex = None
+
+    # Iterate through the DEXs
+    for dex in dex_list:
+        # Make a GET request to the DEX's API to get the token's price
+        url = f"https://{dex}.com/api/v1/token_price?symbol={token_symbol}"
+        response = requests.get(url)
+        data = response.json()
+
+        # Extract the token's price from the API response
+        price = data["price"]
+
+        # Compare the token's price to the current best price
+        if best_price is None or price < best_price:
+            best_price = price
+            best_dex = dex
+
+    # Return the best DEX and price
+    return best_dex, best_price
+
+# Example usage
+token_symbol = "TOKEN"
+best_dex, best_price = get_token_price(token_symbol)
+print(f"The best price for {token_symbol} is {best_price} on {best_dex}")
