@@ -6,7 +6,7 @@ def get_token_price(token_symbol):
     best_price = None
     best_dex = None
 
-    # Iterate through the DEXs
+    # Iterate through the DEXs all the time
     for dex in dex_list:
         # Make a GET request to the DEX's API to get the token's price
         url = f"https://{dex}.com/api/v1/token_price?symbol={token_symbol}"
